@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* CSS */
+        .bloc {
+            color: red;
+            font-size: large;
+            clear: both;
+        }
+
+        .bloc > div {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+            border: 1px solid blue;
+            padding: 20px;
+            width: 100px;
+            height: 100px;
+            font-size: xx-large;
+        }
+
+        .zoneDebug {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Morpion de Daniel</h1>
+
+
+<div id="tableau">
+    <div class="dani big bloc">
+        <div class=""></div>
+        <div class=""></div>
+        <div class=""></div>
+    </div>
+    <div class="dani big bloc">
+        <div class=""></div>
+        <div class=""></div>
+        <div class=""></div>
+    </div>
+    <div class="dani big bloc">
+        <div class=""></div>
+        <div class=""></div>
+        <div class=""></div>
+    </div>
+</div>
+
+
+<div class="bloc">
+    <br>
+    <br>
+    <br>
+    <br>
+    <button id="recommencer">recommencer</button>
+</div>
+<div class="bloc zoneDebug">
+    (DEBUG)
+    <span id="debug">Tu as clické recharger</span>
+</div>
+
+
+<script>
+    // javascript
+
+    function recharger(source) {
+        document.querySelectorAll('#tableau > div > div').forEach(function ($cellule) {
+            console.log($cellule);
+            $cellule.innerText = ''
+        })
+
+
+        let $debug = document.getElementById('debug')
+        $debug.innerHTML =
+            'Tu as clické recharger'
+    }
+
+    function changerContenu(source) {
+        let $elementDuClick = source.target
+
+        if (!source.target.parentElement.classList.contains("dani"))
+            return
+
+        let avant = $elementDuClick.innerText
+
+        if (avant == 'X') {
+            $elementDuClick.innerText = 'O'
+        } else {
+            $elementDuClick.innerText = 'X'
+        }
+
+
+        let $debug = document.getElementById('debug')
+        $debug.innerHTML =
+            'Avant: ' + avant + ' ' +
+            'Tu as clické: ' + $elementDuClick
+    }
+
+    // console.log
+    let x = 1 + 10;
+    let $element = document.getElementById('tableau')
+    $element.addEventListener('click', changerContenu)
+
+    let $recommencer = document.getElementById('recommencer')
+    $recommencer.addEventListener('click', recharger)
+
+
+    //     document.getElementsByTagName('h1')[0].innerHTML = `igor ${x}`
+    // .innerHTML = `igor ${x}`
+</script>
+
+
+</body></html>
